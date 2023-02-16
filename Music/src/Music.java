@@ -2,24 +2,76 @@ enum Note {
     MIDDEL_C, C_SHARP, B_FLAT;  // Etc.
 }
 
-class Instrument {
+interface Instrument {
+    int VALEU = 5;
+    void play(Note n);
+    void adjust();
+}
+
+class Wind implements Instrument {
     public void play(Note n) {
-        System.out.println("Instrument.play()");        
+        System.out.println(this + ".play() " + n);
+    }
+    public String toString() {
+        return "Wind";
+    }
+    public void adjust() {
+        System.out.println(this + ".adjust()");
     }
 }
 
-class Wind extends Instrument {
+class Percussion implements Instrument {
     public void play(Note n) {
-        System.out.println("Wind.play() " + n);
+        System.out.println(this + ".play() " + n);
+    }
+    public String toString() {
+        return "Percussion";
+    }
+    public void adjust() {
+        System.out.println(this + ".adjust()");
+    }
+}
+
+class Stringed implements Instrument {
+    public void play(Note n) {
+        System.out.println(this + ".play() " + n);
+    }
+    public String toString() {
+        return "Stringed";
+    }
+    public void adjust() {
+        System.out.println(this + ".adjust()");
+    }
+}
+
+class Brass extends Wind {
+    public String toString() {
+        return "Brass";
+    }
+}
+
+class Woodwind extends Wind {
+    public String toString() {
+        return "Woodwind";
     }
 }
 
 public class Music {
-    public static void tune(Instrument i) {
+    static void tune(Instrument i) {
         i.play(Note.MIDDEL_C);
     }
+    static void tuneAll(Instrument[] e) {
+        for (Instrument i : e) 
+          tune(i);
+    }
     public static void main(String[] args) {
-        Wind flute = new Wind();
-        tune(flute);
+        Instrument[] orchestra = {
+            new Wind(),
+            new Percussion(),
+            new Stringed(),
+            new Brass(),
+            new Woodwind()
+        };
+        tuneAll(orchestra);
     }
 }
