@@ -1,3 +1,6 @@
+//: innerclasses/DotThis.java
+// Qualifying access to the outer-class object.
+
 public class DotThis {
     void f() {
         System.out.println("DotThis.f()");
